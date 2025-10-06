@@ -8,11 +8,11 @@ def dict_1(parts):
 def template(words):
     return{i: words[i].split() for i in words}
 def last_template(template):
-    for i in template:
-        d = template[i]
-        symbols = '.,!?/#_%$@^&*'
-        cleaner = [''.join(ch for ch in w if ch not in symbols) for w in d]
-        template[i] = cleaner
-    return template
+        symbols = '.,!?/#_%$@^&*()'
+        return {k: [''.join(ch for ch in w if ch not in symbols) for w in v] for k,v in template.items()}
 def word_count(last_template):
     return sum(len(last_template[i]) for i in last_template)
+def length_words(last_template):
+    t = sum(len(i) for d in last_template.values() for i in d)
+    w = word_count(last_template)
+    return round(t/w)

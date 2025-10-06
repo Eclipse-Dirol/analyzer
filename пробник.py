@@ -1,4 +1,18 @@
-
+""" def length_word(last_template):
+    t=0
+    y=0
+    for i in last_template:
+        d = last_template[i]
+        for item in d:
+            t+=len(item)
+    w=word_count(last_template)
+    y=t/w
+    print(round(y))
+    сокращенно:
+def length_word(last_template):
+    t = sum(len(i) for d in last_template.values() for i in d)
+    w = word_count(last_template)
+    return round(t/w)"""
 """ def word_count(last_template):
     words =0
     for i in last_template:
@@ -6,15 +20,19 @@
         words+=int(x)
     return words 
     сокращенно:
-    def word_count(last_template):
-        return sum(len(last_template[i]) for i in last_template)"""
-""" def word_count(template):
+def word_count(last_template):
+    return sum(len(last_template[i]) for i in last_template)"""
+""" def last_template(template):
     for i in template:
         d = template[i]
         symbols = '.,!?/#_%$@^&*'
         cleaner = [''.join(ch for ch in w if ch not in symbols) for w in d]
         template[i] = cleaner
-    return template """
+    return template 
+    сокращённо:
+    def last_template(template):
+        symbols = '.,!?/#_%$@^&*()'
+        return {k: [''.join(ch for ch in w if ch not in symbols) for w in v] for k,v in template.items()}"""
 """ def dict_1(parts):
     dict_1 = {}
     x=1
