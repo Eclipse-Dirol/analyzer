@@ -10,7 +10,7 @@ def main():
     last_template = utils.last_template(template)
     word_count = utils.word_count(last_template)
     length_word = utils.length_words(last_template)
-    print(word_count)
+    utils.show_panel(word_count, length_word)
 if __name__ == "__main__":
     main()
 #P:/text_analyzer/data/sample.txt
