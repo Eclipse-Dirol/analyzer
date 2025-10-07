@@ -32,6 +32,9 @@ def show_panel(word_count, length_word):
             elif answer_2 == 2:
                 print("Okey, bye")
                 exit()
+            else:
+                print("Wrong format!!!")
+                exit()
         elif answer == 2:
             print("answer:", length_word)
             choice(2)
@@ -40,8 +43,10 @@ def show_panel(word_count, length_word):
                 return show_panel(word_count, length_word)
             elif answer_2 == 2:
                 print("Okey, bye")
+                exit() 
+            else:
+                print("Wrong format!!!")
                 exit()
-
 def choice(a):
     if a == 1:
         answer_1 = print("Select action:\n1) Count the number of words.\n2) Calculate the average word length.")
