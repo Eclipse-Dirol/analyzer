@@ -1,15 +1,3 @@
-def filepath(path):
-    path = path.replace("\\", "/")
-    return path
-def read_text(filepath):
-    with open(filepath, 'r', encoding='utf-8') as file:
-        return file.read()
-def word_count(last_template):
-    return sum(len(last_template[i]) for i in last_template)
-def length_words(last_template):
-    t = sum(len(i) for d in last_template.values() for i in d)
-    w = word_count(last_template)
-    return round(t/w)
 def show_panel(word_count, length_word):
     choice(1)
     while True:
