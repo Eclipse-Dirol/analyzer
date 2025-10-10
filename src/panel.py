@@ -29,7 +29,5 @@ def show_panel(word_count, length_word):
 def choice(a):
     if a == 1:
         answer_1 = print("Select action:\n1) Count the number of words.\n2) Calculate the average word length.")
-        return answer_1
     elif a == 2:
         answer_2 = print("Do you want to know something else?\n1) YES!\n2) NO!")
-        return answer_2

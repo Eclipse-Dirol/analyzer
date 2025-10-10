@@ -8,7 +8,7 @@ class cleaners:
     def template(self, words):
         return {i: words[i].split() for i in words}
     def last_template(self, template):
-        symbols = '.,!?/#_%$@^&*()""\'\'{}[]'
+        symbols = '.,!?/#_%$@^&*()"\'\'{}[];:-_=+'
         return {k: [''.join(ch for ch in w if ch not in symbols) for w in v] for k,v in template.items()}
     def process(self):
         parts = self.split()
