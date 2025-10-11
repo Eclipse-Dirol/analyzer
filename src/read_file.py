@@ -1,30 +1,38 @@
 from pathlib import Path
 class read_files:
     def __init__(self, filepath):
-        self.filepath = filepath
+        self.filepath = Path(filepath)
+        
+    def text(self, path):
+        path = Path(path)
+        if self.examination(path) != False:
+            return self.read(path)
+        else:
+            while True:
+                i = Path(input("File not found, try again:\n"))
+                f = self.examination(i)
+                if f:
+                    return self.read(f)
+                
+    def examination(self, file):
+        if file.exists() and file.is_file() == True:
+            return file
+        else:
+            return False
+                
+    def zero(self, text):
+        while len(text) == 0:
+            aswer = input("File is empty, try again:\n")
+            r = self.text(aswer)
+            if r:
+                return r
+        return text
 
-    def return_answer(self):
-        return_answer = input()
-        filepath = Path(return_answer.replace("\\", "/")).expanduser()
-        return filepath
-    
-    def Try(self, filepath):
-        try:
-            with filepath.open("r", encoding="utf-8") as f:
-                return f.read()
-        except:
-            return None
+    def read(self, filepath):
+        with open(filepath, 'r', encoding='utf-8') as f:
+            return f.read()
 
-    def read_text(self, filepath):
-        filepath = Path(filepath)
-        while True:
-            if filepath.exists() and filepath.is_file():
-                return self.Try(filepath)
-            else:
-                print("File not found, try again, please:")
-                f = self.return_answer()
-                if f.exists() and f.is_file():
-                    return self.Try(f)
-    
     def process(self):
-        return self.read_text(self.filepath)
+        one = self.text(self.filepath)
+        return self.zero(one)
+        
