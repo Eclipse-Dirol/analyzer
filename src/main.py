@@ -6,7 +6,7 @@ def main():
     path = input('Введите путь к файлу:\n')
     read = read_files(path)
     text = read.process()
-    print(text)
+
     c = cleaners(text)
     last_template = c.process()
 
@@ -15,4 +15,3 @@ def main():
     show_panel(word_count, length_word)
 if __name__ == "__main__":
     main()
-#P:\text_analyzer\src\data\sample.txt
