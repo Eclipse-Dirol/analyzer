@@ -30,14 +30,15 @@ class read_files:
             with open(filepath, 'r', encoding='utf-8') as f:
                 return f.read()
         except Exception as e:
-            return e
+            print(f'Error: {e}')
+            return None
 
     def zero(self, text):
         attempts = 1
         while not text:
             aswer = input("File is empty, try again:\n")
             r = self.text(aswer)
-            if r:
+            if isinstance(r, str) and r:
                 return r
             if attempts==3:
                 print("Many attempts, try again late.")

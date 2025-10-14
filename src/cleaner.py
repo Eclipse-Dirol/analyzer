@@ -4,7 +4,7 @@ class cleaners:
         self.text = text
 
     def split(self):
-        return re.split(r'[!.?;.]', self.text)
+        return re.split(r'[!.?;]', self.text)
 
     def dict_1(self, parts):
         dict_1 = {}
