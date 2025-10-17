@@ -1,7 +1,7 @@
 from cleaner import cleaners
 from panel import Panel
 from read_file import read_files
-import methods
+from methods import calculations
 def main():
     path = input('Введите путь к файлу:\n')
     read = read_files(path)
@@ -10,10 +10,10 @@ def main():
     c = cleaners(text)
     last_template = c.process()
 
-    word_count = methods.word_count(last_template)
-    length_word = methods.length_words(last_template)
-
-    p = Panel(word_count, length_word)
+    cal = calculations(last_template)
+    e = cal.process()
+    print(e)
+    p = Panel(1, 1)
     p.process()
 if __name__ == "__main__":
     main()
