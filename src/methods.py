@@ -1,10 +1,10 @@
 import numpy as np
-class calculations:
+class Calculations:
     def __init__(self, dict_general):
         self.dict_general = dict_general
-        self.dict_words_lengths = self.list_np(self.dict_general)
+        self.dict_words_lengths = self.create_word_lengths(self.dict_general)
 
-    def list_np(self, dict_words):
+    def create_word_lengths(self, dict_words):
         word_length = []
         for sentence in dict_words.values():
             word_length.extend(sentence)
@@ -16,7 +16,7 @@ class calculations:
     
     def sum_words(self):
         return len(self.dict_words_lengths)
-
+            
     def words_lengths(self):
         return self.dict_words_lengths
     

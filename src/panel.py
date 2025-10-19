@@ -18,6 +18,9 @@ class Panel:
                 print("answer:", self.all_calculation[2])
             elif answer_1 == 4:
                 print("answer:", self.all_calculation[3])
+            elif answer_1 == 5:
+                print("Okay, bye")
+                exit()
             else:
                 print("Wrong format!!!")
                 continue
@@ -40,7 +43,7 @@ class Panel:
 
     def choice(self, a):
         if a == 1:
-            print("Select action:\n1) Count the number of words.\n2) Calculate the average word length.\n3) Calculate the sum of all letters.\n4) Display the length of all words.")
+            print("Select action:\n1) Count the number of words.\n2) Calculate the average word length.\n3) Calculate the sum of all letters.\n4) Display the length of all words.\n5) Exit.")
         elif a == 2:
             print("Do you want to know something else?\n1) YES!\n2) NO!")
     

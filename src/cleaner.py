@@ -1,5 +1,5 @@
 import re
-class cleaners:
+class Cleaners:
     def __init__(self, text):
         self.text = text
 
