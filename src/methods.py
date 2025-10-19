@@ -20,8 +20,11 @@ class calculations:
     def words_lengths(self):
         return self.dict_words_lengths
     
+    def average_value(self):
+        return round(np.mean(self.dict_words_lengths))
+    
     def process(self):
-        self.list_np(self.dict_general)
         self.sum_letters()
         self.sum_words()
         self.words_lengths()
+        self.average_value()
