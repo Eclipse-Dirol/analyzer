@@ -15,7 +15,7 @@ class read_files:
                 if f:
                     return self.read(f)
                 if tries == 3:
-                    print("Many attempts, try again late.")
+                    print("Many attempts, try again later.")
                     exit()
                 tries +=1
                 
@@ -36,12 +36,12 @@ class read_files:
     def zero(self, text):
         attempts = 1
         while not text:
-            aswer = input("File is empty, try again:\n")
-            r = self.text(aswer)
+            answer = input("File is empty, try again:\n")
+            r = self.text(answer)
             if isinstance(r, str) and r:
                 return r
             if attempts==3:
-                print("Many attempts, try again late.")
+                print("Many attempts, try again later.")
                 exit()
             attempts+=1
         return text

@@ -24,7 +24,8 @@ class calculations:
         return round(np.mean(self.dict_words_lengths))
     
     def process(self):
-        self.sum_letters()
-        self.sum_words()
-        self.words_lengths()
-        self.average_value()
+        a = self.sum_words()
+        b = self.average_value()
+        c = self.sum_letters()
+        d = self.words_lengths()
+        return a,b,c,d

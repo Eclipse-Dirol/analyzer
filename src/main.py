@@ -11,9 +11,9 @@ def main():
     last_template = c.process()
 
     cal = calculations(last_template)
-    e = cal.process()
-    print(e)
-    p = Panel(1, 1)
+    all_calculation = cal.process()
+
+    p = Panel(all_calculation)
     p.process()
 if __name__ == "__main__":
     main()
