@@ -13,9 +13,15 @@ class calculations:
     
     def sum_letters(self):
         return np.sum(self.dict_words_lengths)
+    
     def sum_words(self):
         return len(self.dict_words_lengths)
+
+    def words_lengths(self):
+        return self.dict_words_lengths
+    
     def process(self):
         self.list_np(self.dict_general)
+        self.sum_letters()
         self.sum_words()
-        return self.sum_words()
+        self.words_lengths()
