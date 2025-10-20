@@ -12,7 +12,7 @@ def main():
     
     cal = Calculations(last_template)
     all_calculation = cal.process()
-
+    
     p = Panel(all_calculation)
     p.process()
 

@@ -3,7 +3,7 @@ class Read_Files:
     def __init__(self, filepath):
         self.filepath = Path(filepath)
         
-    def text(self, path):
+    def text(self, path) -> str:
         path = Path(path)
         if self.examination(path) != False:
             return self.read(path)
@@ -19,13 +19,13 @@ class Read_Files:
                     exit()
                 tries +=1
                 
-    def examination(self, file):
+    def examination(self, file) -> Path:
         if file.exists() and file.is_file():
             return file
         else:
             return False
                 
-    def read(self, filepath):
+    def read(self, filepath) -> str:
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
                 return f.read()
@@ -33,7 +33,7 @@ class Read_Files:
             print(f'Error: {e}')
             return None
 
-    def zero(self, text):
+    def zero(self, text) -> str:
         attempts = 1
         while not text:
             answer = input("File is empty, try again:\n")
@@ -49,4 +49,3 @@ class Read_Files:
     def process(self):
         one = self.text(self.filepath)
         return self.zero(one)
-        
