@@ -1,5 +1,5 @@
 from pathlib import Path
-class Read_files:
+class Read_Files:
     def __init__(self, filepath):
         self.filepath = Path(filepath)
         

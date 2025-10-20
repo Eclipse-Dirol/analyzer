@@ -4,7 +4,8 @@ class Cleaners:
         self.text = text
 
     def split_sentence(self):
-        split_sentence = re.split(r'[!.?;]', self.text)
+        split_sentence = self.text.lower()
+        split_sentence = re.split(r'[!.?;]', split_sentence)
         split_sentence = [item.strip() for item in split_sentence if item.strip()]
         return split_sentence
     
