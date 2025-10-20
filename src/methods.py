@@ -6,16 +6,22 @@ class Calculations:
 
     def create_word_lengths(self, dict_words) -> np.ndarray:
         word_length = []
-        for sentence in dict_words.values():
-            word_length.extend(sentence)
-        word_lengths = np.array([len(word) for word in word_length])
-        return word_lengths
+        if len(dict_words.values()) == 0:
+            return 0
+        else:
+            for sentence in dict_words.values():
+                word_length.extend(sentence)
+            word_lengths = np.array([len(word) for word in word_length])
+            return word_lengths
     
     def sum_letters(self) -> np.ndarray:
         return np.sum(self.dict_words_lengths)
     
     def sum_words(self) -> int:
-        return len(self.dict_words_lengths)
+        value = self.dict_words_lengths
+        if isinstance(value, (list, dict, str, tuple, set, np.ndarray)):
+            return len(value)
+        return 0
             
     def words_lengths(self) -> np.ndarray:
         return self.dict_words_lengths

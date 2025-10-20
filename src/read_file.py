@@ -10,7 +10,7 @@ class Read_Files:
         else:
             tries = 1
             while True:
-                i = Path(input("File not found, try again:\n"))
+                i = Path(input("File is not found or is not in .txt format, try again:\n"))
                 f = self.examination(i)
                 if f:
                     return self.read(f)
@@ -20,7 +20,7 @@ class Read_Files:
                 tries +=1
                 
     def examination(self, file) -> Path:
-        if file.exists() and file.is_file():
+        if file.exists() and file.is_file() and file.suffix == ".txt":
             return file
         else:
             return False

@@ -17,15 +17,19 @@ class Cleaners:
     
     def last_template(self, template) -> dict:
         symbols = '.,!?/#_%$@^&*()"\'{}[];:-_=+'
-        return {k: [''.join(ch for ch in word if ch not in symbols) for word in v] 
-                for k, v in template.items()}
+        clean_template = {}
+        for key, words in template.items():
+            clean_words = [
+                ''.join(ch for ch in word if ch not in symbols)
+                for word in words
+                ]
+            clean_words = [w for w in clean_words if w]
+            if clean_words:
+                clean_template[key] = clean_words
+        return clean_template
     
     def process(self):
         parts = self.split_sentence()
         words = self.dict_1(parts)
         temp = self.template(words)
         return self.last_template(temp)
-
-
-        
-        
