@@ -1,19 +1,20 @@
-from cleaner import cleaners
+from cleaner import Cleaners
 from panel import Panel
-from read_file import read_files
-import methods
+from read_file import Read_Files
+from methods import Calculations
 def main():
-    path = input('Введите путь к файлу:\n')
-    read = read_files(path)
+    path = input('Enter the path to the file:\n')
+    read = Read_Files(path)
     text = read.process()
 
-    c = cleaners(text)
+    c = Cleaners(text)
     last_template = c.process()
 
-    word_count = methods.word_count(last_template)
-    length_word = methods.length_words(last_template)
-
-    p = Panel(word_count, length_word)
+    cal = Calculations(last_template)
+    all_calculation = cal.process()
+    
+    p = Panel(all_calculation)
     p.process()
+
 if __name__ == "__main__":
     main()

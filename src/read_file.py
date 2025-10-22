@@ -1,31 +1,31 @@
 from pathlib import Path
-class read_files:
+class Read_Files:
     def __init__(self, filepath):
         self.filepath = Path(filepath)
         
-    def text(self, path):
+    def text(self, path) -> str:
         path = Path(path)
         if self.examination(path) != False:
             return self.read(path)
         else:
             tries = 1
             while True:
-                i = Path(input("File not found, try again:\n"))
+                i = Path(input("File is not found or is not in .txt format, try again:\n"))
                 f = self.examination(i)
                 if f:
                     return self.read(f)
                 if tries == 3:
-                    print("Many attempts, try again late.")
+                    print("Many attempts, try again later.")
                     exit()
                 tries +=1
                 
-    def examination(self, file):
-        if file.exists() and file.is_file():
+    def examination(self, file) -> Path:
+        if file.exists() and file.is_file() and file.suffix == ".txt":
             return file
         else:
             return False
                 
-    def read(self, filepath):
+    def read(self, filepath) -> str:
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
                 return f.read()
@@ -33,15 +33,15 @@ class read_files:
             print(f'Error: {e}')
             return None
 
-    def zero(self, text):
+    def zero(self, text) -> str:
         attempts = 1
         while not text:
-            aswer = input("File is empty, try again:\n")
-            r = self.text(aswer)
+            answer = input("File is empty, try again:\n")
+            r = self.text(answer)
             if isinstance(r, str) and r:
                 return r
             if attempts==3:
-                print("Many attempts, try again late.")
+                print("Many attempts, try again later.")
                 exit()
             attempts+=1
         return text
@@ -49,4 +49,3 @@ class read_files:
     def process(self):
         one = self.text(self.filepath)
         return self.zero(one)
-        

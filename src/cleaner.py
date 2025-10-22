@@ -1,36 +1,35 @@
 import re
-class cleaners:
+class Cleaners:
     def __init__(self, text):
         self.text = text
 
-    def split(self):
-        return re.split(r'[!.?;]', self.text)
-
-    def dict_1(self, parts):
-        dict_1 = {}
-        x=1
-        for item in parts:
-            dict_1[x] = item
-            x+=1
-        for key in list(dict_1.keys()):
-            if not dict_1[key]:
-                del dict_1[key]
-        dict_2 = {}
-        new_keys=1
-        for old_keys in sorted(dict_1.keys()):
-            dict_2[new_keys]= dict_1[old_keys]
-            new_keys+=1  
-        return dict_2
-
-    def template(self, words):
-        return {i: words[i].split() for i in words}
+    def split_sentence(self) -> str:
+        split_sentence = self.text.lower()
+        split_sentence = re.split(r'[!.?;]', split_sentence)
+        split_sentence = [item.strip() for item in split_sentence if item.strip()]
+        return split_sentence
     
-    def last_template(self, template):
-        symbols = '.,!?/#_%$@^&*()"\'\'{}[];:-_=+'
-        return {k: [''.join(ch for ch in w if ch not in symbols) for w in v] for k,v in template.items()}
+    def dict_1(self, parts) -> dict:
+        return {i + 1: part for i, part in enumerate(parts) if part}
+    
+    def template(self, words) -> dict:
+        return {k: v.split() for k, v in words.items()}
+    
+    def last_template(self, template) -> dict:
+        symbols = '.,!?/#_%$@^&*()"\'{}[];:-_=+'
+        clean_template = {}
+        for key, words in template.items():
+            clean_words = [
+                ''.join(ch for ch in word if ch not in symbols)
+                for word in words
+                ]
+            clean_words = [w for w in clean_words if w]
+            if clean_words:
+                clean_template[key] = clean_words
+        return clean_template
     
     def process(self):
-        parts = self.split()
+        parts = self.split_sentence()
         words = self.dict_1(parts)
-        template = self.template(words)
-        return self.last_template(template)
+        temp = self.template(words)
+        return self.last_template(temp)
