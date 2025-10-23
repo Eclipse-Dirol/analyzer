@@ -1,3 +1,3 @@
-This is my project, currently a text analyzer.
-Currently, two functions are available: word count and average word length. Support for .txt files with a specific path.
-I will update it and change it constantly.
+This is my project, currently a text analyzer. 
+A couple of functions are available. TXT files with a specified path are supported. 
+I will be updating and modifying it regularly.
