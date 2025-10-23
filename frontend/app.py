@@ -26,12 +26,6 @@ if input_file == "Upload file":
         if uploaded_file:
             file_action = st.radio("File action", ("Select action", "Process now", "See text"))
     if uploaded_file is not None and file_action == "Process now":
-        with col_1:
-            if st.session_state.all_calc:
-                answer = st.radio("", option, key="result_radio")
-            else:
-                st.info("Нажмите 'Execute' для обработки файла")
-                answer = True
         with col_2:
             submit = st.button("Execute")
         if submit:
@@ -46,7 +40,9 @@ if input_file == "Upload file":
             except Exception as e:
                 st.session_state.all_calc = None
                 st.error(f"Error during processing: {e}")
-
+        with col_1:
+            if st.session_state.all_calc:
+                answer = st.radio("", option, key="result_radio")
         with col_3:
             st.write("Answer:")
             if submit and st.session_state.all_calc:
@@ -68,7 +64,7 @@ if input_file == "Upload file":
                         text = raw.decode("cp1251", errors="replace")
                     with col_2_:
                         st.write(text)
-
+                        
 elif input_file == "SQL":
     st.write("Now this methods is not currently supported.")
 elif input_file == "FastAPI":
