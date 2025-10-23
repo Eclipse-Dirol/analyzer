@@ -1,49 +1,75 @@
 import sys, os
 import streamlit as st
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.cleaner import Cleaners
 from src.methods import Calculations
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+def process(text):
+    c = Cleaners(text)
+    last_template = c.process()
+    cal = Calculations(last_template)
+    all_calculation = cal.process()
+    return all_calculation
 st.title("ANALYZER")
 input_file = ["Upload file", "SQL", "FastAPI"]
-file_list = [".txt", ".bin", ".csv"]
-input_answer = st.selectbox("Select a file upload method", input_file)
-if input_answer == "Upload file":
-    file_answer = st.selectbox("Select file extension", file_list)
-    if file_answer == ".txt":
-        calculation = ["Select action","Count the number of words", "Calculate the average word length", "Calculate the sum of all letters", "Display the length of all words"]
-        file = st.file_uploader("Upload file", type=".txt")
-        try:
-            text = file.read().decode("utf-8")
-            c = Cleaners(text)
-            last_template = c.process()
-            cal = Calculations(last_template)
-            all_calculation = cal.process()
-            answer_action = st.selectbox("",calculation)
-            if answer_action == "Count the number of words":
-                st.write(all_calculation[0])
-            if answer_action == "Calculate the average word length":
-                st.write(all_calculation[1])
-            if answer_action == "Calculate the sum of all letters":
-                st.write(all_calculation[2])
-            if answer_action == "Display the length of all words":
-                st.write(all_calculation[3])
-        except Exception as e:
-            st.error(f"Ошибка: {e}")
-        
+file_list = ["Select format", ".txt", ".bin", ".csv"]
+option = ["Count the number of words", "Calculate the average word length", 
+"Calculate the sum of all letters", "Display the length of all words"]
+input_file = st.radio("Select a file upload method", input_file)
+if input_file == "Upload file":
+    col1, col2 = st.columns([2,1])
+    col_1, col_2, col_3= st.columns([3,1,2])
+    col_1_, col_2_ = st.columns([1,4])
+    with col1:
+        uploaded_file = st.file_uploader("Upload file", type=["txt"])
+    with col2:
+        if uploaded_file:
+            file_action = st.radio("File action", ("Select action", "Process now", "See text"))
+    if uploaded_file is not None and file_action == "Process now":
+        with col_1:
+            if st.session_state.all_calc:
+                answer = st.radio("", option, key="result_radio")
+            else:
+                st.info("Нажмите 'Execute' для обработки файла")
+                answer = True
+        with col_2:
+            submit = st.button("Execute")
+        if submit:
+            raw = uploaded_file.read()
+            try:
+                text = raw.decode("utf-8")
+            except UnicodeDecodeError:
+                text = raw.decode("cp1251", errors="replace")
+            st.session_state.raw_text = text
+            try:
+                st.session_state.all_calc = process(st.session_state.raw_text)
+            except Exception as e:
+                st.session_state.all_calc = None
+                st.error(f"Error during processing: {e}")
 
+        with col_3:
+            st.write("Answer:")
+            if submit and st.session_state.all_calc:
+                mapping = {
+                    option[0]: st.session_state.all_calc[0],
+                    option[1]: st.session_state.all_calc[1],
+                    option[2]: st.session_state.all_calc[2],
+                    option[3]: st.session_state.all_calc[3],
+                }
+                st.write(mapping.get(answer))
+    elif uploaded_file is not None and file_action == "See text":
+            with col_1_:
+                show = st.button("Show text", key="show_text")
+                if show:
+                    raw = uploaded_file.read()
+                    try:
+                        text = raw.decode("utf-8")
+                    except UnicodeDecodeError:
+                        text = raw.decode("cp1251", errors="replace")
+                    with col_2_:
+                        st.write(text)
 
-
-
-
-
-
-
-    elif file_answer == ".bin":
-        st.write("Now this methods is not currently supported.")
-    elif file_answer == ".csv":
-        st.write("Now this methods is not currently supported.")
-elif input_answer == "SQL":
+elif input_file == "SQL":
     st.write("Now this methods is not currently supported.")
-elif input_answer == "FastAPI":
-    st.write("Now this methods is not currently supported.")
+elif input_file == "FastAPI":
+    st.write("Now this methods is not currently supported.") 
