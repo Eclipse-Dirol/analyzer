@@ -27,23 +27,24 @@ if input_file == "Upload file":
         if uploaded_file:
             file_action = st.radio("File action", ("Select action", "Process now", "See text"))
     if uploaded_file is not None and file_action == "Process now":
+        raw = uploaded_file.read()
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            text = raw.decode("cp1251", errors="replace")
+        st.session_state.raw_text = text
+        with col_1:
+            if st.session_state.raw_text:
+                answer = st.radio("", option, key="result_radio")
         with col_2:
-            submit = st.button("Execute")
+            if answer:
+                submit = st.button("Execute")
         if submit:
-            raw = uploaded_file.read()
-            try:
-                text = raw.decode("utf-8")
-            except UnicodeDecodeError:
-                text = raw.decode("cp1251", errors="replace")
-            st.session_state.raw_text = text
             try:
                 st.session_state.all_calc = process(st.session_state.raw_text)
             except Exception as e:
                 st.session_state.all_calc = None
                 st.error(f"Error during processing: {e}")
-        with col_1:
-            if st.session_state.all_calc:
-                answer = st.radio("", option, key="result_radio")
         with col_3:
             st.write("Answer:")
             if submit and st.session_state.all_calc:
