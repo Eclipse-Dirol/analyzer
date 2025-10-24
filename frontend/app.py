@@ -16,6 +16,7 @@ file_list = ["Select format", ".txt", ".bin", ".csv"]
 option = ["Count the number of words", "Calculate the average word length", 
 "Calculate the sum of all letters", "Display the length of all words"]
 input_file = st.radio("Select a file upload method", input_file)
+st.write("Upload text without diacritics, they will not be recognized and the analysis will break.")
 if input_file == "Upload file":
     col1, col2 = st.columns([2,1])
     col_1, col_2, col_3= st.columns([3,1,2])
