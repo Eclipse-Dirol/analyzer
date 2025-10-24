@@ -16,7 +16,7 @@ class Cleaners:
         return {k: v.split() for k, v in words.items()}
     
     def last_template(self, template) -> dict:
-        symbols = '.,!?/#_%$@^&*()"\'{}[];:-_=+'
+        symbols = '.,!?/#_%$@^&*()"\'{}[];:''`-_=+—~'
         clean_template = {}
         for key, words in template.items():
             clean_words = [
