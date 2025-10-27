@@ -40,7 +40,6 @@ class AnalyzerApp:
                 with col2:
                     if uploaded_file is not None:
                         file_action = st.radio("File action", ("Select action", "Process now", "See text"))
-                    
                 if uploaded_file is not None and file_action == "Process now":
                     reader = FileReader(file_type=select_file_type)
                     try:
@@ -74,7 +73,61 @@ class AnalyzerApp:
                             reader = FileReader(file_type=select_file_type)
                             text = reader.read(uploaded_file)
                             with col_2_:
-                                st.write(text)
+                                st.write(text)  
+                            
+            elif select_file_type == ".csv":
+                with col1:
+                    uploaded_file = st.file_uploader("Upload file", type=["csv"])
+                with col2:
+                    if uploaded_file is not None:
+                        file_action = st.radio("File action", ("Select action", "Process now", "See file"))
+                if uploaded_file is not None and file_action == "Process now":
+                    reader = FileReader(file_type=select_file_type)
+                    try:
+                        table = reader.read(uploaded_file)
+                        st.session_state.csv_file = table
+                    except Exception as e:
+                        st.error(f"Error: {e}")
+                        return
+                    with col_1:
+                        if 'csv_file' in st.session_state:
+                            answer_1 = st.radio("", self.options, key="result_radio")
+                    with col_2:
+                        if answer_1:
+                            submit = st.button("Execute")
+                    if submit:
+                        try:
+                            all_calc = process(st.session_state.csv_file)
+                            st.session_state.all_calc = all_calc
+                            self.mapping = dict(zip(self.options, all_calc))
+                        except Exception as e:
+                            st.session_state.all_calc = None
+                            st.error(f"Error during processing: {e}")
+                    with col_3:
+                        st.write("Answer:")
+                        if 'all_calc' in st.session_state and st.session_state.all_calc and submit:
+                            st.write(self.mapping.get(answer))
+                elif uploaded_file and file_action == "See file":
+                    with col_1_:
+                        show = st.button("Show file", key="show_file")
+                        if show:
+                            reader = FileReader(file_type=select_file_type)
+                            table = reader.read(uploaded_file)
+                            with col_2_:
+                                st.table(table)
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             else:
                 st.write("This file type is not currently supported.")
         else:
