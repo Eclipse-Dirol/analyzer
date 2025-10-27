@@ -1,7 +1,7 @@
 from cleaner import Cleaners
 from panel import Panel
 from read_file import Read_Files
-from methods import Calculations
+from src.methods_for_text import Calculations
 def main():
     path = input('Enter the path to the file:\n')
     read = Read_Files(path)

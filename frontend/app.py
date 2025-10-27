@@ -2,7 +2,7 @@ import sys, os
 import streamlit as st
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.cleaner import Cleaners
-from src.methods import Calculations
+from src.methods_for_text import Calculations
 from frontend.read_downloaded_file import FileReader
 
 def process(text):
